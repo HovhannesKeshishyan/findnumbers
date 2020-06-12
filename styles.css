@@ -1,0 +1,213 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+
+	/*background: linear-gradient(90deg, rgba(24,24,25,1) 0%, rgba(38,66,42,1) 53%, rgba(37,58,62,1) 100%);*/
+}
+
+.container {
+	display: grid;
+	width: 700px;
+	height: 700px;
+	grid-template-rows: 50px 1fr auto;
+	align-items: center;
+	justify-content: center;
+}
+
+header {	
+    /*background-image: linear-gradient(315deg, #6daddb 0%, #313131 84%);*/
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    color: green;
+	text-align: center;
+}
+
+.main {
+	display: grid;
+	height: 100%;
+	width: 700px;
+	background-color: grey;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-areas: 'numbers numbers r_l_blok'
+	                     'numbers numbers r_l_blok'	                     
+	                     'b_l_blok b_l_blok buttons_blok';
+}
+
+.numbers_blok {
+	grid-area: numbers;
+	background-color: grey;
+	display: grid;
+	grid-template-columns: repeat(3, 30%);
+	grid-template-rows: repeat(3, 30%);
+	grid-gap: 3%;
+	justify-content: center;
+	align-content: center;	
+}
+
+
+
+.number {	
+	background-color: white;
+	border: 10px double green;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: green;
+	font-size: 4rem;
+	margin: 2%;	
+}
+
+.number:active {	
+	width: 80%;
+	margin-left: 10%;
+	height: 80%;
+	margin-top: 18.7%;	
+}
+
+
+
+.right-lights-blok {
+	grid-area: r_l_blok;
+	background-color: #000;	
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);	
+	justify-items: center;
+	align-items: center;	
+}
+
+.right-light {
+	background-color: red;	
+	width: 65%;
+	height: 42%;
+	align-self: center;
+	text-align: center;
+	border-radius: 50%;	
+}
+
+.buttom-lights-blok {	
+	grid-area: b_l_blok;
+	background-color: #000;	
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);	
+	justify-items: center;
+	align-items: center;
+}
+
+
+
+
+.buttom-light {
+	background-color: red;	
+	width: 35%;
+	height: 87%;
+	border-radius: 50%;	
+}
+
+.control-blok {
+	grid-area: buttons_blok;	
+}
+
+.try {
+    background-color: green;
+    width: 100%;
+    height: 25%;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 10%;
+}
+
+#reset, #check {
+	width: 40%;
+	height: 80px;
+	border-radius: 20%;
+	background-color: lightblue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+	cursor: pointer;
+}
+
+.modal_container {
+	display: none;
+	position: absolute;	
+	width: 700px;
+	height: 700px;
+	background-color: rgba(128,128,128,0.5);
+}
+
+.modal {
+	display: block;
+	position: absolute;
+	width: 400px;
+	height: 300px;
+	border: 2px solid gold;
+	background-color: rgba(255,255,255,0.8);
+	left: 150px;
+	top: 150px;
+	color: green;
+}
+
+.modal_message {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	height: 100px;
+	margin: 10% auto;
+	border: 2px solid green;
+	font-size: 3rem;
+}
+
+.modal_buttons {
+	display: flex;
+	justify-content: space-around;
+}
+
+#modal_ok_button, #modal_play_again_button {
+	display: flex;
+	width: 30%;
+	height: 50px;
+	border: 2px solid green;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+
+footer {	
+	background: linear-gradient(90deg, rgba(24,24,25,1) 0%, rgba(38,66,42,1) 53%, rgba(37,58,62,1) 100%);
+	color: white;
+	text-align: center;
+}
+
+
+
+
+/*@media only screen and (max-width: 590px) {
+  .container {	
+	width: 400px;
+	height: 500px;
+	grid-template-rows: 30px 1fr 30px;
+	align-items: center;
+	justify-content: center;
+  }
+  .number {	
+	width: 20%;
+	height: 15%;
+  }
+}*/
