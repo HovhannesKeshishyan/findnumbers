@@ -1,8 +1,9 @@
 <template>
-  <BaseLoader v-if="is_loading"/>
-  <div v-show="!is_loading" class="app-container">
+  <h1 v-if="error_message" style="color: #9a1d26">{{ error_message }}</h1>
+  <BaseLoader v-else-if="is_loading"/>
+  <div v-show="!error_message && !is_loading" class="app-container">
     <TheHeader/>
-    <MainPage @loading-change="handleLoadingChange"/>
+    <MainPage @loading-change="handleLoadingChange" @on-error="handleError"/>
     <TheFooter/>
   </div>
 </template>
@@ -19,13 +20,19 @@ export default {
 
   data() {
     return {
-      is_loading: false
+      is_loading: false,
+      error_message: null
     }
   },
 
   methods: {
     handleLoadingChange(is_loading) {
       this.is_loading = is_loading;
+    },
+
+    handleError(err) {
+      console.log(err)
+      this.error_message = err?.message || "Something went wrong";
     }
   }
 }

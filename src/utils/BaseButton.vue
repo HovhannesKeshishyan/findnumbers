@@ -34,6 +34,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/colors.scss";
+
 .base-button {
   display: flex;
   justify-content: center;
@@ -47,31 +49,31 @@ export default {
   cursor: pointer;
 
   &.light-blue {
-    background-color: #7ebaf1;
+    background-color: $light-blue
   }
 
   &.primary, &.warning, &.danger, &.success {
-    color: #fff;
+    color: $white;
   }
 
   &.primary {
-    background-color: #3e67ba;
+    background-color: $primary;
   }
 
   &.warning {
-    background-color: #e69035;
+    background-color: $warning;
   }
 
   &.danger {
-    background-color: #9a1d26;
+    background-color: $danger;
   }
 
   &.success {
-    background-color: #6bad5b;
+    background-color: $success;
   }
 
   &.disabled {
-    background-color: #485461;
+    background-color: $inactive;
     cursor: default;
     pointer-events: none;
     opacity: 0.5;

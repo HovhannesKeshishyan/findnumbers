@@ -1,6 +1,6 @@
 <template>
-  <header class="app__flex-center">
-    <h1>Header</h1>
+  <header>
+    <h1>Find the numbers</h1>
   </header>
 </template>
 
@@ -11,12 +11,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/utils.scss";
+@import "@/styles/colors.scss";
+
 header {
+  @include flex-center;
   min-height: 8rem;
   font-size: 1.8rem;
-  /*background-image: linear-gradient(315deg, #6daddb 0%, #313131 84%);*/
+  padding: 1.5rem 3rem;
   background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
-  color: green;
+  color: $white;
   text-align: center;
+
+  @media only screen and (max-width: 450px) {
+    padding: 1.5rem 2rem;
+    font-size: 1.5rem;
+  }
 }
 </style>
