@@ -62,6 +62,7 @@ export default {
 
   &.warning {
     background-color: $warning;
+    color: $black;
   }
 
   &.danger {
