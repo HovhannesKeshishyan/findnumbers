@@ -1,5 +1,11 @@
 <template>
   <main class="game-section main">
+    <InfoModal v-if="showInfoModal"
+               @on-confirm="handleModalConfirm"
+               :modal-title="infoModalData.modalTitle"
+               :modal-message="infoModalData.modalMessage"
+               :ok-btn-text="infoModalData.okBtnText"
+               :hide-cancel-btn="true"/>
     <SectionLoader v-if="is_loading"/>
 
     <div class="table-and-row-results">
@@ -35,7 +41,7 @@
         <span :class="attemptsLeft.class_name">{{ attemptsLeft.attempts_left }}</span>
       </div>
       <div class="buttons">
-        <BaseButton @click="restartGame" label="Restart" type="warning"/>
+        <BaseButton @click="reInitGame" label="Restart" type="warning"/>
         <BaseButton @click="checkResult" label="Check"/>
       </div>
     </div>
@@ -43,42 +49,31 @@
 </template>
 
 <script>
-import BaseButton from "@/utils/BaseButton.vue";
+import {mapMutations} from "vuex";
+import InfoModal from "@/components/InfoModal.vue";
 import SectionLoader from "@/utils/SectionLoader.vue";
-import {checkGameResult, startGame} from "@/services/https-service.js";
+import BaseButton from "@/utils/BaseButton.vue";
+import {checkGameResult, startGame, restartGame} from "@/services/https-service.js";
+import {createInitialMatrix, createInitialResults} from "@/helpers/create-initial-data.js";
 
 export default {
   name: "GameSection",
-  components: {SectionLoader, BaseButton},
+  components: {InfoModal, SectionLoader, BaseButton},
 
   created() {
-    this.getGameData();
+    this.initNewGame();
   },
 
   data() {
     return {
       game_id: null,
       is_winner: false,
+      is_loss: false,
       is_loading: false,
-      state: [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-      ],
+      state: createInitialMatrix(),
       attempts_left: 0,
 
-      results: {
-        rows: {
-          1: 0,
-          2: 0,
-          3: 0
-        },
-        cols: {
-          1: 0,
-          2: 0,
-          3: 0
-        }
-      },
+      results: createInitialResults(),
 
       result_items_class_names: {
         0: "none",
@@ -104,10 +99,29 @@ export default {
         class_name: class_name + " attempts_left",
         attempts_left: this.attempts_left
       }
+    },
+
+    showInfoModal() {
+      return this.is_winner || this.is_loss;
+    },
+
+    infoModalData() {
+      const win_text = `You successfully find all numbers after ${10 - this.attempts_left} attempts.`;
+      const loss_text = "Unfortunately you use all attempts and don't find all number, but don't worry you can try again."
+      return {
+        modalTitle: this.is_winner ? "Congratulations" : "Game over...",
+        modalMessage: this.is_winner ? win_text : loss_text,
+        okBtnText: this.is_winner ? "Play again" : "Try again"
+      }
     }
   },
 
   methods: {
+    ...mapMutations({
+      setLoading: "global/setLoading",
+      setError: "global/setError",
+    }),
+
     increaseNumber(col_index, row_index) {
       let value = this.state[col_index][row_index] + 1;
       if (value > 9) value = 0;
@@ -124,18 +138,30 @@ export default {
       return transformedData;
     },
 
-    async getGameData() {
-      this.is_loading = true;
-      this.$emit("loading-change", true);
+    resetGameData() {
+      this.is_winner = false;
+      this.is_loss = false;
+      this.is_loading = false;
+      this.state = createInitialMatrix();
+      this.attempts_left = 0;
+      this.results = createInitialResults();
+    },
+
+    handleModalConfirm() {
+      this.resetGameData();
+      this.initNewGame();
+    },
+
+    async initNewGame() {
+      this.setLoading(true);
       try {
         const {data} = await startGame();
         this.game_id = data.id;
         this.attempts_left = data.attempts;
       } catch (err) {
-        this.$emit("on-error", err);
+        this.setError(err);
       }
-      this.$emit("loading-change", false);
-      this.is_loading = false;
+      this.setLoading(false);
     },
 
     async checkResult() {
@@ -143,25 +169,28 @@ export default {
       try {
         const {data} = await checkGameResult(this.game_id, this.state);
         this.is_winner = data.is_winner;
+        this.is_loss = data.is_loss;
         this.results.rows = data.rows;
         this.results.cols = data.cols;
         this.attempts_left = data.attempts;
 
-        if (data.is_winner) {
-          //todo
-        } else if (data.attempts === 0) {
-          //todo
-        }
       } catch (err) {
-        this.$emit("on-error", err);
+        this.setError(err);
       }
       this.is_loading = false;
     },
 
-    async restartGame() {
-      this.is_loading = true;
-      console.log("reset");
-      this.is_loading = false;
+    async reInitGame() {
+      this.resetGameData();
+      this.setLoading(true);
+      try {
+        const {data} = await restartGame(this.game_id);
+        this.game_id = data.id;
+        this.attempts_left = data.attempts;
+      } catch (err) {
+        this.setError(err);
+      }
+      this.setLoading(false);
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <GameSection @loading-change="$emit('loading-change')" @on-error="$emit('on-error')"/>
+  <GameSection/>
 </template>
 
 <script>
