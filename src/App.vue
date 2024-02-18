@@ -1,6 +1,7 @@
 <template>
   <h1 v-if="errorData" style="color: #9a1d26">{{ errorData.message }}</h1>
   <BaseLoader v-else-if="isLoading"/>
+
   <div v-show="!errorData && !isLoading" class="app-container">
     <TheHeader/>
     <MainPage/>
@@ -30,13 +31,9 @@ export default {
 
 <style scoped lang="scss">
 .app-container {
-  margin: 5rem;
-  box-shadow: 0 0 2px 2px #03A9F4;
-  border-radius: 1rem;
-  overflow: hidden;
+  max-width: 1920px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 700px;
-  width: 100%;
 }
 </style>

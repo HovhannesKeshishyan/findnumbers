@@ -106,8 +106,8 @@ export default {
     },
 
     infoModalData() {
-      const win_text = `You successfully find all numbers after ${10 - this.attempts_left} attempts.`;
-      const loss_text = "Unfortunately you use all attempts and don't find all number, but don't worry you can try again."
+      const win_text = `You have successfully find all numbers after ${10 - this.attempts_left} attempts.`;
+      const loss_text = "Unfortunately you use all attempts, but don't find all numbers, but don't worry you can try again."
       return {
         modalTitle: this.is_winner ? "Congratulations" : "Game over...",
         modalMessage: this.is_winner ? win_text : loss_text,
@@ -215,7 +215,7 @@ $rect-size-sm: 50px;
   .table-and-row-results {
     display: flex;
     gap: 2rem;
-    padding: 1.5rem 3rem;
+    padding: 3rem 3rem 1.5rem 3rem;
   }
 
   .numbers_block {

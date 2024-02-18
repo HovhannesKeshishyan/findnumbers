@@ -105,7 +105,7 @@ export default {
       width: 100%;
       text-align: center;
       padding: 15px 30px;
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid $white;
     }
 
     .modal_message {
