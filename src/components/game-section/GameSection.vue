@@ -50,7 +50,7 @@
 
 <script>
 import {mapMutations} from "vuex";
-import InfoModal from "@/components/InfoModal.vue";
+import InfoModal from "@/components/modals/InfoModal.vue";
 import SectionLoader from "@/utils/SectionLoader.vue";
 import BaseButton from "@/utils/BaseButton.vue";
 import {checkGameResult, startGame, restartGame} from "@/services/https-service.js";

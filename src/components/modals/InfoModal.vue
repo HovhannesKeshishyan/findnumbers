@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <div class="info_modal">
+    <div :class="`info_modal ${modalType}`">
       <div class="modal_shape"></div>
 
       <div class="modal_content">
@@ -9,7 +9,7 @@
         <div class="modal_message">{{ modalMessage }}</div>
 
         <div class="modal_buttons">
-          <button @click=handleOkClick class="ok_btn">
+          <button @click=handleOkClick :class="`ok_btn ${okBtnType}`">
             {{ okBtnText }}
           </button>
 
@@ -28,6 +28,13 @@ export default {
   emits: ["on-confirm", "on-cancel"],
 
   props: {
+    modalType: {
+      type: String,
+      default: "success",
+      validator(value) {
+        return ["success", "warning", "error"].includes(value);
+      }
+    },
     modalTitle: {
       type: String,
       default: "Congratulations"
@@ -38,6 +45,13 @@ export default {
     okBtnText: {
       type: String,
       default: "Ok"
+    },
+    okBtnType: {
+      type: String,
+      default: "primary",
+      validator(value) {
+        return ["primary", "success", "warning", "error"].includes(value);
+      }
     },
     cancelBtnText: {
       type: String,
@@ -62,8 +76,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/colors.scss";
-@import "@/styles/utils.scss";
+@import "@/styles/colors";
+@import "@/styles/utils";
 
 .info_modal {
   position: absolute;
@@ -144,6 +158,15 @@ export default {
           }
         }
 
+        &.ok_btn.error {
+          background-color: $danger;
+
+          &:hover {
+            background-color: darken($danger, 10%);
+          }
+        }
+
+
         &.cancel_btn {
           background-color: $danger;
 
@@ -152,6 +175,14 @@ export default {
           }
         }
       }
+    }
+  }
+
+  &.error {
+    .modal_content {
+      background-color: $white;
+      box-shadow: 0 0 8px 4px $danger;
+      color: $danger;
     }
   }
 }

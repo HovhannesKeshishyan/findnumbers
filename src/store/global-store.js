@@ -12,7 +12,9 @@ export const global_store = {
     mutations: {
         setLoading: (state, loading) => state.is_loading = loading,
         setError: (state, error) => {
-            if (!error.message) error.message = "Something went wrong";
+            if(error) {
+                error.message = error?.response?.data?.message || error?.message || "Something went wrong";
+            }
             state.error = error;
         }
     },

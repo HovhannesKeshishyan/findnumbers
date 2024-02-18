@@ -1,39 +1,37 @@
 <template>
-  <h1 v-if="errorData" style="color: #9a1d26">{{ errorData.message }}</h1>
+  <ErrorModal v-if="errorData" @on-confirm="resetError" :error="errorData"/>
   <BaseLoader v-else-if="isLoading"/>
 
-  <div v-show="!errorData && !isLoading" class="app-container">
-    <TheHeader/>
+  <DefaultLayout v-show="!errorData && !isLoading">
     <MainPage/>
-    <TheFooter/>
-  </div>
+  </DefaultLayout>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import BaseLoader from "./utils/BaseLoader.vue";
+import {mapGetters, mapMutations} from "vuex";
+import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import MainPage from "./pages/MainPage.vue";
-import TheHeader from "./components/TheHeeader.vue";
-import TheFooter from "./components/TheFooter.vue";
+import BaseLoader from "./utils/BaseLoader.vue";
+import ErrorModal from "@/components/modals/ErrorModal.vue";
 
 export default {
   name: "App",
-  components: {TheFooter, TheHeader, BaseLoader, MainPage},
+  components: {DefaultLayout, BaseLoader, MainPage, ErrorModal},
 
   computed: {
     ...mapGetters({
       isLoading: "global/isLoading",
       errorData: "global/errorData"
     })
+  },
+
+  methods: {
+    ...mapMutations({
+      setError: "global/setError"
+    }),
+    resetError() {
+      this.setError(null);
+    }
   }
 }
 </script>
-
-<style scoped lang="scss">
-.app-container {
-  max-width: 1920px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-</style>
