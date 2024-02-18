@@ -4,7 +4,10 @@ import axios from "axios";
 const BASE_URL_PROD = 'https://find-numbers-backend.vercel.app/';
 const BASE_URL_DEV = 'http://localhost:3000/';
 
-axios.defaults.baseURL = BASE_URL_PROD;
+const MODE = import.meta.env.MODE
+const BASE_URL = MODE === "development" ? BASE_URL_DEV : BASE_URL_PROD;
+
+axios.defaults.baseURL = BASE_URL;
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
