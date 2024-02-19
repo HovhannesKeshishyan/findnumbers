@@ -22,7 +22,8 @@ export default {
 .default-layout {
   max-width: 1920px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Header, Main Content, Footer */
 }
 </style>
