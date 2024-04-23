@@ -5,7 +5,7 @@ import App from './App.vue';
 
 import "./plugins/axios-interceptor.js";
 
-import store from "@/store/index.js";
+import store from "@/store/index.ts";
 
 const app = createApp(App);
 app.use(store);

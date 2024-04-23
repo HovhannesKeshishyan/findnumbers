@@ -7,14 +7,15 @@
   </DefaultLayout>
 </template>
 
-<script>
+<script lang="ts">
+import {defineComponent} from 'vue';
 import {mapGetters, mapMutations} from "vuex";
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import MainPage from "./pages/MainPage.vue";
 import BaseLoader from "./utils/BaseLoader.vue";
 import ErrorModal from "@/components/modals/ErrorModal.vue";
 
-export default {
+export default defineComponent({
   name: "App",
   components: {DefaultLayout, BaseLoader, MainPage, ErrorModal},
 
@@ -33,5 +34,5 @@ export default {
       this.setError(null);
     }
   }
-}
+})
 </script>
