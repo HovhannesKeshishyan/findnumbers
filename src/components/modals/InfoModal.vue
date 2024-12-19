@@ -9,7 +9,7 @@
         <div class="modal_message">{{ modalMessage }}</div>
 
         <div class="modal_buttons">
-          <button @click=handleOkClick :class="`ok_btn ${okBtnType}`">
+          <button @click="handleOkClick" :class="`ok_btn ${okBtnType}`">
             {{ okBtnText }}
           </button>
 
@@ -33,34 +33,34 @@ export default {
       default: "success",
       validator(value) {
         return ["success", "warning", "error"].includes(value);
-      }
+      },
     },
     modalTitle: {
       type: String,
-      default: "Congratulations"
+      default: "Congratulations",
     },
     modalMessage: {
-      type: String
+      type: String,
     },
     okBtnText: {
       type: String,
-      default: "Ok"
+      default: "Ok",
     },
     okBtnType: {
       type: String,
       default: "primary",
       validator(value) {
         return ["primary", "success", "warning", "error"].includes(value);
-      }
+      },
     },
     cancelBtnText: {
       type: String,
-      default: "Cancel"
+      default: "Cancel",
     },
     hideCancelBtn: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   methods: {
@@ -70,12 +70,13 @@ export default {
 
     handleCancelClick() {
       this.$emit("on-cancel");
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
+@use "sass:color";
 @import "@/styles/colors";
 @import "@/styles/utils";
 
@@ -154,7 +155,7 @@ export default {
           background-color: $primary;
 
           &:hover {
-            background-color: darken($primary, 10%);
+            background-color: color.adjust($primary, $lightness: -10%);
           }
         }
 
@@ -162,16 +163,15 @@ export default {
           background-color: $danger;
 
           &:hover {
-            background-color: darken($danger, 10%);
+            background-color: color.adjust($danger, $lightness: -10%);
           }
         }
-
 
         &.cancel_btn {
           background-color: $danger;
 
           &:hover {
-            background-color: darken($danger, 10%);
+            background-color: color.adjust($danger, $lightness: -10%);
           }
         }
       }
