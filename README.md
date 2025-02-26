@@ -40,4 +40,4 @@ npm run build
 
 ### Github URL
 
-[https://github.com/Hovhannes1991/findnumbers](https://github.com/Hovhannes1991/findnumbers).
+[https://github.com/HovhannesKeshishyan/findnumbers](https://github.com/HovhannesKeshishyan/findnumbers).
