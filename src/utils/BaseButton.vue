@@ -34,12 +34,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/colors.scss";
+@use "@/styles/utils";
+@use "@/styles/colors";
 
 .base-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include utils.flex-center;
   outline: none;
   border: none;
   min-width: 100px;
@@ -49,32 +48,32 @@ export default {
   cursor: pointer;
 
   &.light-blue {
-    background-color: $light-blue
+    background-color: colors.$light-blue;
   }
 
   &.primary, &.warning, &.danger, &.success {
-    color: $white;
+    color: colors.$white;
   }
 
   &.primary {
-    background-color: $primary;
+    background-color: colors.$primary;
   }
 
   &.warning {
-    background-color: $warning;
-    color: $black;
+    background-color: colors.$warning;
+    color: colors.$black;
   }
 
   &.danger {
-    background-color: $danger;
+    background-color: colors.$danger;
   }
 
   &.success {
-    background-color: $success;
+    background-color: colors.$success;
   }
 
   &.disabled {
-    background-color: $inactive;
+    background-color: colors.$inactive;
     cursor: default;
     pointer-events: none;
     opacity: 0.5;

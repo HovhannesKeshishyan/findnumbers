@@ -77,8 +77,8 @@ export default {
 
 <style scoped lang="scss">
 @use "sass:color";
-@import "@/styles/colors";
-@import "@/styles/utils";
+@use "@/styles/utils";
+@use "@/styles/colors";
 
 .info_modal {
   position: absolute;
@@ -94,7 +94,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $white;
+    background-color: colors.$white;
     opacity: 0.8;
   }
 
@@ -110,9 +110,9 @@ export default {
     justify-content: space-between;
     flex-direction: column;
     margin: 50px auto;
-    background-color: $persian-green;
+    background-color: colors.$persian-green;
     border-radius: 10px;
-    box-shadow: 0 0 8px 2px $jungle-green;
+    box-shadow: 0 0 8px 2px colors.$jungle-green;
 
     .modal_title {
       font-size: 3rem;
@@ -120,7 +120,7 @@ export default {
       width: 100%;
       text-align: center;
       padding: 15px 30px;
-      border-bottom: 1px solid $white;
+      border-bottom: 1px solid colors.$white;
     }
 
     .modal_message {
@@ -132,14 +132,14 @@ export default {
     }
 
     .modal_buttons {
-      @include flex-center;
+      @include utils.flex-center;
       gap: 2rem;
       width: 100%;
       padding: 15px 30px;
-      border-top: 1px solid $white;
+      border-top: 1px solid colors.$white;
 
       button {
-        @include flex-center;
+        @include utils.flex-center;
         min-width: 100px;
         min-height: 45px;
         padding: 10px 30px;
@@ -149,29 +149,29 @@ export default {
         outline: none;
         border: 2px solid transparent;
         transition: background-color 0.2s ease-in-out;
-        color: $white;
+        color: colors.$white;
 
         &.ok_btn {
-          background-color: $primary;
+          background-color: colors.$primary;
 
           &:hover {
-            background-color: color.adjust($primary, $lightness: -10%);
+            background-color: color.adjust(colors.$primary, $lightness: -10%);
           }
         }
 
         &.ok_btn.error {
-          background-color: $danger;
+          background-color: colors.$danger;
 
           &:hover {
-            background-color: color.adjust($danger, $lightness: -10%);
+            background-color: color.adjust(colors.$danger, $lightness: -10%);
           }
         }
 
         &.cancel_btn {
-          background-color: $danger;
+          background-color: colors.$danger;
 
           &:hover {
-            background-color: color.adjust($danger, $lightness: -10%);
+            background-color: color.adjust(colors.$danger, $lightness: -10%);
           }
         }
       }
@@ -180,9 +180,9 @@ export default {
 
   &.error {
     .modal_content {
-      background-color: $white;
-      box-shadow: 0 0 8px 4px $danger;
-      color: $danger;
+      background-color: colors.$white;
+      box-shadow: 0 0 8px 4px colors.$danger;
+      color: colors.$danger;
     }
   }
 }

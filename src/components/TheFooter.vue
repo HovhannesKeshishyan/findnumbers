@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/colors.scss";
+@use "@/styles/colors";
 
 .footer {
   display: flex;
@@ -81,7 +81,7 @@ export default {
       }
 
       &:hover {
-        color: $orange;
+        color: colors.$orange;
       }
     }
   }
@@ -91,7 +91,7 @@ export default {
     transition: color 0.5s ease-in-out;
 
     &:hover {
-      color: $orange;
+      color: colors.$orange;
     }
   }
 }

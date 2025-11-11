@@ -197,8 +197,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/colors.scss";
-@import "@/styles/utils.scss";
+@use "@/styles/utils";
+@use "@/styles/colors";
 
 $rect-size: 120px;
 $rect-size-md: 100px;
@@ -237,9 +237,9 @@ $rect-size-sm: 50px;
 
   .number,
   .result-item {
-    @include flex-center;
+    @include utils.flex-center;
     font-size: 4rem;
-    background-color: $white;
+    background-color: colors.$white;
     user-select: none;
   }
 
@@ -257,28 +257,28 @@ $rect-size-sm: 50px;
     width: 100%;
     height: 100%;
     border-radius: 100%;
-    color: $white;
+    color: colors.$white;
 
     &.none {
-      background-color: $danger;
+      background-color: colors.$danger;
     }
 
     &.low {
-      background-color: $warning;
+      background-color: colors.$warning;
     }
 
     &.mid {
-      background-color: $primary;
+      background-color: colors.$primary;
     }
 
     &.completed {
-      background-color: $persian-green;
+      background-color: colors.$persian-green;
     }
   }
 
   .number {
-    border: 10px double $jungle-green;
-    color: $jungle-green;
+    border: 10px double colors.$jungle-green;
+    color: colors.$jungle-green;
     cursor: pointer;
   }
 
@@ -319,7 +319,7 @@ $rect-size-sm: 50px;
     }
 
     .numbers_block .number {
-      border: 2px solid $jungle-green;
+      border: 2px solid colors.$jungle-green;
     }
 
     .numbers_block .number,
@@ -351,26 +351,26 @@ $rect-size-sm: 50px;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 2rem;
-  border-top: 1px solid $white;
+  border-top: 1px solid colors.$white;
   padding: 1.5rem 3rem;
 
   .attempts {
     font-size: 3rem;
-    color: $white;
+    color: colors.$white;
 
     .attempts_left {
       margin-left: 1rem;
 
       &.success {
-        color: $jungle-green;
+        color: colors.$jungle-green;
       }
 
       &.warning {
-        color: $warning;
+        color: colors.$warning;
       }
 
       &.danger {
-        color: $danger;
+        color: colors.$danger;
       }
     }
   }
